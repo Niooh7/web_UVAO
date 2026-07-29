@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 dark:bg-gray-950;
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-card hover:shadow-card-hover transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white px-4 py-2.5 rounded-xl hover:bg-primary-700 active:scale-[0.98] transition-all duration-200 font-medium shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply bg-white dark:bg-gray-900 text-primary-600 dark:text-primary-400 px-4 py-2.5 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-950/40 transition-all duration-200 font-medium border border-primary-200 dark:border-primary-800;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-400 dark:focus:border-primary-600 transition-all duration-200;
+  }
+
+  .heading-primary {
+    @apply text-3xl font-bold text-gray-900 dark:text-white mb-6;
+  }
+
+  .heading-secondary {
+    @apply text-xl font-bold text-gray-900 dark:text-white;
+  }
+
+  .section-divider {
+    @apply flex items-center gap-3 mb-5;
+  }
+
+  .section-divider h2 {
+    @apply heading-secondary;
+  }
+
+  .section-divider::after {
+    content: '';
+    @apply flex-1 h-px bg-gradient-to-r from-gray-200 dark:from-gray-700 to-transparent;
+  }
+}
+
+/* ─── PDF Viewer ─────────────────────────────────────────── */
+
+.react-pdf__Page {
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.react-pdf__Page:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.react-pdf__Page canvas {
+  border-radius: 0.75rem;
+  max-width: 100%;
+}
+
+.react-pdf__message {
+  padding: 2rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.dark .react-pdf__Page {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pdf-scroll-container {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.react-pdf__Page__canvas {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* ─── Mobile PDF ─────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .react-pdf__Page {
+    margin-bottom: 0.75rem;
+    border-radius: 0.5rem;
+  }
+  .react-pdf__Page canvas {
+    border-radius: 0.5rem;
+  }
+}
+
+/* ─── Scrollbars ─────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.25);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.45);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
+.overflow-auto::-webkit-scrollbar,
+.pdf-scroll-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.overflow-auto::-webkit-scrollbar-track,
+.pdf-scroll-container::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 8px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb,
+.pdf-scroll-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  border-radius: 8px;
+  border: 2px solid #e5e7eb;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb:hover,
+.pdf-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+}
+
+.dark .overflow-auto::-webkit-scrollbar-track,
+.dark .pdf-scroll-container::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.dark .overflow-auto::-webkit-scrollbar-thumb,
+.dark .pdf-scroll-container::-webkit-scrollbar-thumb {
+  border-color: #1f2937;
+}
+
+/* ─── Selection ─────────────────────────────────────────── */
+
+::selection {
+  background-color: rgba(124, 58, 237, 0.2);
+  color: inherit;
+}

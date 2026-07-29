@@ -1,0 +1,83 @@
+# ─── Dependencies ─────────────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+
+# ─── Build output ─────────────────────────────────────────────────────────────
+dist/
+frontend/dist/
+dist-ssr/
+*.tsbuildinfo
+
+# ─── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+
+# ─── Environment variables ────────────────────────────────────────────────────
+.claude/
+.env
+.env.local
+*.local
+backend/.env
+
+# ─── Databases (содержат продовые данные, не для VCS) ─────────────────────────
+backend/Databases/*
+!backend/Databases/.gitkeep
+
+# ─── Сгенерированные отчёты ───────────────────────────────────────────────────
+backend/public/MM/*
+!backend/public/MM/.gitkeep
+
+backend/public/NG/*
+!backend/public/NG/.gitkeep
+
+backend/public/MWI/*
+!backend/public/MWI/.gitkeep
+
+backend/public/MWIS/*
+!backend/public/MWIS/.gitkeep
+
+backend/public/Pref/*
+!backend/public/Pref/.gitkeep
+
+backend/public/OATI/*
+!backend/public/OATI/.gitkeep
+
+backend/public/TSAFAP/*
+!backend/public/TSAFAP/.gitkeep
+
+backend/public/baza/*
+!backend/public/baza/.gitkeep
+
+backend/public/files/*
+!backend/public/files/.gitkeep
+
+# ─── Прочие временные и статусные файлы ──────────────────────────────────────
+failure_state.json
+*.log
+*.tmp
+*.temp
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+nginx_config.txt
+
+# ─── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ─── IDE ──────────────────────────────────────────────────────────────────────
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

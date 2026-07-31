@@ -36,13 +36,47 @@ def parcing_mji(attempts=2):
         try:
             driver.get('https://gorod.mos.ru/api/service/auth/auth')
 
-            username = driver.find_element(By.XPATH, '//input[@placeholder="Логин *"]')
-            password = driver.find_element(By.XPATH, '//input[@placeholder="Пароль*"]')
+            # Нажимаем СУДИР
+            WebDriverWait(driver, 20).until(EC.presence_of_element_located(
+                (By.XPATH, '/html/body/div/div/div/main/div/div/div/div[2]/div/div/div/div/div[2]/div')))
+            button = driver.find_element(By.XPATH,
+                                         '/html/body/div/div/div/main/div/div/div/div[2]/div/div/div/div/div[2]/div')
+            button.click()
+            time.sleep(1)
+
+            # Нажимаем выпадающий список организаций
+            WebDriverWait(driver, 20).until(EC.presence_of_element_located(
+                (By.XPATH, '/html/body/div/div/div/main/div/div/div/div[2]/form/div/div/div/div[1]/div[1]/div[1]')))
+            button = driver.find_element(By.XPATH,
+                                         '/html/body/div/div/div/main/div/div/div/div[2]/form/div/div/div/div[1]/div[1]/div[1]')
+            button.click()
+            time.sleep(1)
+
+            # Нажимаем нашу организацию
+            WebDriverWait(driver, 20).until(EC.presence_of_element_located(
+                (By.XPATH, '/html/body/div/div/div[2]/div/div[1]')))
+            button = driver.find_element(By.XPATH,
+                                         '/html/body/div/div/div[2]/div/div[1]')
+            button.click()
+            time.sleep(1)
+
+            # Нажимаем войти в СУДИР
+            WebDriverWait(driver, 20).until(EC.presence_of_element_located(
+                (By.XPATH, '/html/body/div/div/div[1]/main/div/div/div/div[2]/form/button')))
+            button = driver.find_element(By.XPATH,
+                                         '/html/body/div/div/div[1]/main/div/div/div/div[2]/form/button')
+            button.click()
+            time.sleep(1)
+
+            username = driver.find_element(By.XPATH,
+                                           '/html/body/div[1]/main/div/div/div[4]/div[2]/form/div[1]/div/input')
+            password = driver.find_element(By.XPATH,
+                                           '/html/body/div[1]/main/div/div/div[4]/div[2]/form/div[2]/div/input')
             username.send_keys(login_NG)
             password.send_keys(password_NG)
 
             login_button = driver.find_element(By.XPATH,
-                                               '/html/body/div[1]/div/div/main/div/div/div/div[2]/form[1]/button')
+                                               '/html/body/div[1]/main/div/div/div[4]/div[2]/form/button')
             login_button.click()
             WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH,
                                                                             '//div[@class="dashboard__block-link"]//div[@class="button-big link"]//div[@class="dashboard-container__links-title" and contains(text(), "Аналитика")]')))

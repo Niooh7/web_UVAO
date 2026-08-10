@@ -746,10 +746,18 @@ def _sync_mm_data(df, timenow: str) -> None:
         return str(val).strip() if pd.notna(val) else None
 
     rows_upserted = 0
+    skipped_no_district = 0
     batch = []
     for _, row in df.iterrows():
         issue_id = str(row.get(id_col, "")).strip()
         if not issue_id or issue_id in ("nan", "None", ""):
+            continue
+
+        # Район не может быть пустым: в БД на этой колонке может стоять NOT NULL,
+        # и одна пустая ячейка роняет весь executemany целиком.
+        district = _str(row.get("Район"))
+        if not district:
+            skipped_no_district += 1
             continue
 
         deadline_val = row.get("Срок устранения до")
@@ -764,7 +772,7 @@ def _sync_mm_data(df, timenow: str) -> None:
         batch.append((
             issue_id,
             deadline,
-            _str(row.get("Район")),
+            district,
             _str(row.get("Проблема")),
             _str(row.get("Система-источник")),
             _str(row.get("Статус в системе")),
@@ -795,7 +803,8 @@ def _sync_mm_data(df, timenow: str) -> None:
 
     conn.commit()
     conn.close()
-    print(f"[mm_sync] Синхронизировано строк: {rows_upserted}")
+    print(f"[mm_sync] Синхронизировано строк: {rows_upserted}, "
+          f"пропущено без района: {skipped_no_district}")
 
 
 # ──────────────────────────────────────────────

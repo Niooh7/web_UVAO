@@ -62,7 +62,7 @@ def parcing_tsafap():
 
         print("5. Вход на сайт...")
         submit_btn = driver.find_element(By.XPATH,
-                                         "/html/body/cafap-root/cafap-login/cafap-svg-background/div/div[1]/div/div[2]/div/form/div[3]/button")
+                                         "/html/body/cafap-root/cafap-login/cafap-svg-background/div/div[1]/div/div[2]/div/cafap-internal-login/form/div[3]/button")
         submit_btn.click()
         time.sleep(3)
 

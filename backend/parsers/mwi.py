@@ -69,7 +69,7 @@ def parcing_MWI(attempts=2):
                                                '/html/body/div[1]/main/div/div/div[4]/div[2]/form/button')
             login_button.click()
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                            '//div[@class="dashboard__block-link"]//div[@class="button-big link"]//div[@class="dashboard-container__links-title" and contains(text(), "Аналитика")]')))
+                                                                            '/html/body/div/div/div/main/div/div/div/div[3]/div/div[1]/div[2]/div[2]/div[2]')))
 
             try:
                 notification_button = WebDriverWait(driver, 3).until(

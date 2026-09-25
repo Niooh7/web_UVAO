@@ -7,7 +7,7 @@ import paramiko
 import requests
 import pythoncom
 
-from ..config import REPORTS_CONFIG, REPORT_GROUP_ID, TOKEN, rest, FILE_UPLOAD_URL
+from ..config import REPORTS_CONFIG, REPORT_GROUP_ID, REPORT_GROUP_ID_2, TOKEN, rest, FILE_UPLOAD_URL
 
 
 def kill_excel_processes():
@@ -95,7 +95,10 @@ def send_file_to_telegram(file_path: str, caption: str = "Отчёт"):
         file_id = resp.json().get('resource', {}).get('id')
 
         url_send = f"{rest}/botapi/v1/messages/sendFile/-1/{REPORT_GROUP_ID}"
-        payload = {
+        url_send_2 = f"{rest}/botapi/v1/messages/sendFile/-1/{REPORT_GROUP_ID_2}"
+
+        def _make_payload():
+            return {
             "clientRandomId": int(time.time() * 1000),
             "file": {
                 "fileName": os.path.basename(file_path),
@@ -111,15 +114,23 @@ def send_file_to_telegram(file_path: str, caption: str = "Отчёт"):
             "message": caption
         }
 
-        resp2 = requests.post(url_send, headers=headers, json=payload, timeout=60)
+        resp2 = requests.post(url_send, headers=headers, json=_make_payload(), timeout=60)
+        resp3 = requests.post(url_send_2, headers=headers, json=_make_payload(), timeout=60)
 
-        if resp2.status_code == 200:
-            print(f"✅ Файл отправлен: {file_path}")
-            return True
-        else:
-            print(f"❌ Ошибка: {resp2.status_code}")
-            return False
+        ok2 = resp2.status_code == 200
+        ok3 = resp3.status_code == 200
 
+        if not ok2:
+            print(f"Error send to group 1: {resp2.status_code} {resp2.text}")
+        if not ok3:
+            print(f"Error send to group 2: {resp3.status_code} {resp3.text}")
+
+        if ok2 and ok3:
+            print(f"Success sending! {file_path}")
+        elif ok2 and ok3:
+            print(f"Success sending only 1 group! {file_path}")
+
+        return ok2 or ok3
     except Exception as e:
         print(f"❌ Ошибка: {e}")
         return False

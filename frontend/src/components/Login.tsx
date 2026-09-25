@@ -188,7 +188,7 @@ function Login({ onLogin }: LoginProps) {
             <p className="text-center text-white/30 text-xs pt-1">
               Нет аккаунта?{' '}
               <a
-                href="https://web.tdm.mos.ru/user/3155016445519479"
+                href="https://web.tdm.mos.ru/user/3140823953696349"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary-300/80 hover:text-primary-200 underline underline-offset-2 transition-colors"

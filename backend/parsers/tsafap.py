@@ -46,25 +46,26 @@ def parcing_tsafap():
 
         print("2. Нажимаем на кнопку входа...")
         login_btn = driver.find_element(By.XPATH,
-                                        "/html/body/cafap-root/cafap-login/cafap-svg-background/div/div[1]/div/div[2]/div/div[2]/div[1]")
+                                        "/html/body/cafap-root/cafap-login/cafap-svg-background/div/div[1]/div/div[2]/div/div[2]/div/button[1]")
         login_btn.click()
-        time.sleep(1)
+        time.sleep(3)
 
-        print("3. Вводим логин...")
-        username_input = driver.find_element(By.ID, "username")
-        username_input.send_keys(login_TSAFAP)
-        time.sleep(1)
+        username = driver.find_element(By.XPATH,
+                                       '/html/body/div[1]/main/div/div/div[4]/div[2]/form/div[1]/div/input')
+        password = driver.find_element(By.XPATH,
+                                       '/html/body/div[1]/main/div/div/div[4]/div[2]/form/div[2]/div/input')
+        username.send_keys(login_TSAFAP)
+        password.send_keys(password_TSAFAP)
 
-        print("4. Вводим пароль...")
-        password_input = driver.find_element(By.ID, "login-form__password")
-        password_input.send_keys(password_TSAFAP)
-        time.sleep(1)
+        login_button = driver.find_element(By.XPATH,
+                                           '/html/body/div[1]/main/div/div/div[4]/div[2]/form/button')
+        login_button.click()
+
+        time.sleep(3)
 
         print("5. Вход на сайт...")
-        submit_btn = driver.find_element(By.XPATH,
-                                         "/html/body/cafap-root/cafap-login/cafap-svg-background/div/div[1]/div/div[2]/div/cafap-internal-login/form/div[3]/button")
-        submit_btn.click()
-        time.sleep(3)
+        driver.get("https://cafap.mos.ru/cabinet")
+        time.sleep(2)
 
         print("6. Открываем кабинет...")
         cabinet_btn = driver.find_element(By.XPATH,
